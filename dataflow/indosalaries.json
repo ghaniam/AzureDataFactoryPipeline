@@ -50,7 +50,7 @@
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> source1",
 				"source1 filter(and(equals(country, \"Indonesia\"), greater(salary, 10000))) ~> filter1",
-				"filter1 derive(column1 = ERROR_FUNCTION('')) ~> derivedColumn1",
+				"filter1 derive(gender = \"female\") ~> derivedColumn1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
