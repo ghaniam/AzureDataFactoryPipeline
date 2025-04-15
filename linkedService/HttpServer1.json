@@ -2,7 +2,7 @@
 	"name": "HttpServer1",
 	"properties": {
 		"parameters": {
-			"url": {
+			"linkedService_URL": {
 				"type": "String"
 			}
 		},
