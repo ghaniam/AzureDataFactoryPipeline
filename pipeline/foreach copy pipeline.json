@@ -152,7 +152,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflow2",
+						"referenceName": "Cleanup_Flow",
 						"type": "DataFlowReference"
 					},
 					"compute": {
