@@ -72,7 +72,13 @@
 							"outputs": [
 								{
 									"referenceName": "RawData",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
