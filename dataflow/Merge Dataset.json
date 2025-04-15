@@ -1,0 +1,84 @@
+{
+	"name": "Merge Dataset",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "source_group_a",
+						"type": "DatasetReference"
+					},
+					"name": "sourcegroupa"
+				},
+				{
+					"dataset": {
+						"referenceName": "source_group_b",
+						"type": "DatasetReference"
+					},
+					"name": "sourcegroupb"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "mergedDataPalquet",
+						"type": "DatasetReference"
+					},
+					"name": "writeMergedData",
+					"description": "Write merged data to defined data container"
+				}
+			],
+			"transformations": [
+				{
+					"name": "mergeData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          age as string,",
+				"          job as string,",
+				"          marital as string,",
+				"          education as string,",
+				"          default as string,",
+				"          housing as string,",
+				"          loan as string,",
+				"          contact as string,",
+				"          month as string,",
+				"          day_of_week as string,",
+				"          unique_id as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourcegroupa",
+				"source(output(",
+				"          duration as string,",
+				"          campaign as string,",
+				"          pdays as string,",
+				"          previous as string,",
+				"          poutcome as string,",
+				"          {emp.var.rate} as string,",
+				"          {cons.price.idx} as string,",
+				"          {cons.conf.idx} as string,",
+				"          euribor3m as string,",
+				"          {nr.employed} as string,",
+				"          y as string,",
+				"          unique_id as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourcegroupb",
+				"sourcegroupa, sourcegroupb join(sourcegroupa@unique_id == sourcegroupb@unique_id,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> mergeData",
+				"mergeData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> writeMergedData"
+			]
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "mergedDataPalquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "stengdnortheu003",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "defineddata"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
