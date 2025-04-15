@@ -1,0 +1,98 @@
+{
+	"name": "indonesiansalary",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "srcuserdata1",
+						"type": "DatasetReference"
+					},
+					"name": "srcuserdata1"
+				},
+				{
+					"dataset": {
+						"referenceName": "srcuserdata2",
+						"type": "DatasetReference"
+					},
+					"name": "srcuserdata2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "destuserdata1_csv",
+						"type": "DatasetReference"
+					},
+					"name": "MoveToDest"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     mod_value as integer (0)",
+				"}",
+				"source(output(",
+				"          registration_dttm as timestamp,",
+				"          id as integer,",
+				"          first_name as string,",
+				"          last_name as string,",
+				"          email as string,",
+				"          gender as string,",
+				"          ip_address as string,",
+				"          cc as string,",
+				"          country as string,",
+				"          birthdate as string,",
+				"          salary as double,",
+				"          title as string,",
+				"          comments as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> srcuserdata1",
+				"source(output(",
+				"          registration_dttm as timestamp,",
+				"          id as integer,",
+				"          first_name as string,",
+				"          last_name as string,",
+				"          email as string,",
+				"          gender as string,",
+				"          ip_address as string,",
+				"          cc as string,",
+				"          country as string,",
+				"          birthdate as string,",
+				"          salary as double,",
+				"          title as string,",
+				"          comments as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> srcuserdata2",
+				"join1 filter(and (equals(srcuserdata1@country, \"Indonesia\"), greater(srcuserdata1@salary, 1000))) ~> filter1",
+				"srcuserdata1, srcuserdata2 join(srcuserdata1@first_name == srcuserdata2@first_name,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"filter1 derive(id_mod = mod(srcuserdata1@id, 2)) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> MoveToDest"
+			]
+		}
+	}
+}
