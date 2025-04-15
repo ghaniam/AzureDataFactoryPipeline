@@ -1,0 +1,23 @@
+{
+	"name": "define_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "stengdnortheu003",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "part-00000-3223c61b-ac93-42e6-9710-d854b7d86155-c000.snappy.parquet",
+				"container": "defineddata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
