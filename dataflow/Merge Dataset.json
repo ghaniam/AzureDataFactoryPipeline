@@ -11,10 +11,19 @@
 					"name": "sourcegroupb"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "mergedDataPalquet",
+						"type": "DatasetReference"
+					},
+					"name": "writeMergedData",
+					"description": "Write merged data to defined data container"
+				}
+			],
 			"transformations": [
 				{
-					"name": "join1"
+					"name": "mergeData"
 				}
 			],
 			"scriptLines": [
@@ -26,7 +35,12 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1"
+				"     broadcast: 'auto')~> mergeData",
+				"mergeData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> writeMergedData"
 			]
 		}
 	}
