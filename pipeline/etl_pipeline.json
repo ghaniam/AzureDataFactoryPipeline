@@ -65,6 +65,8 @@
 			{
 				"name": "Indonesian Salary Data Flow",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -98,8 +100,8 @@
 					},
 					"ifFalseActivities": [
 						{
-							"name": "Indonesian Salary Data Flow_copy2",
-							"type": "ExecuteDataFlow",
+							"name": "Copy Source to Destination_copy1",
+							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
@@ -110,16 +112,50 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"dataflow": {
-									"referenceName": "indonesiansalary",
-									"type": "DataFlowReference"
+								"source": {
+									"type": "ParquetSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "ParquetReadSettings"
+									}
 								},
-								"compute": {
-									"coreCount": 8,
-									"computeType": "General"
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
 								},
-								"traceLevel": "Fine"
-							}
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "srcuserdata1",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "destuserdata1_csv",
+									"type": "DatasetReference"
+								}
+							]
 						}
 					],
 					"ifTrueActivities": [
@@ -138,7 +174,13 @@
 							"typeProperties": {
 								"dataflow": {
 									"referenceName": "indonesiansalary",
-									"type": "DataFlowReference"
+									"type": "DataFlowReference",
+									"parameters": {
+										"mod_value": {
+											"value": "@pipeline().parameters.mod_value",
+											"type": "Expression"
+										}
+									}
 								},
 								"compute": {
 									"coreCount": 8,
