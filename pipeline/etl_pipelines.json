@@ -1,5 +1,5 @@
 {
-	"name": "etl_pipeline",
+	"name": "etl_pipelines",
 	"properties": {
 		"activities": [
 			{
