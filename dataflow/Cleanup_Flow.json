@@ -9,7 +9,7 @@
 						"referenceName": "defined",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "ParquetSource"
 				}
 			],
 			"sinks": [
@@ -50,8 +50,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> source1",
-				"source1 sink(allowSchemaDrift: true,",
+				"     format: 'parquet') ~> ParquetSource",
+				"ParquetSource sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sink2"
