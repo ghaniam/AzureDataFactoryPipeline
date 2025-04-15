@@ -2,7 +2,7 @@
 	"name": "Source",
 	"properties": {
 		"parameters": {
-			"linkedService_URL": {
+			"url": {
 				"type": "string",
 				"defaultValue": "test"
 			}
@@ -10,8 +10,8 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "@{linkedService().linkedService_URL}",
-			"enableServerCertificateValidation": false,
+			"url": "@{linkedService().url}",
+			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
 	}
