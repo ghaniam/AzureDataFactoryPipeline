@@ -1,0 +1,68 @@
+{
+	"name": "UserData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "stengdnortheu003",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "b4e0c862-7f92-47d0-b848-a54fbbc53010",
+				"container": "rawdata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "age",
+				"type": "String"
+			},
+			{
+				"name": "job",
+				"type": "String"
+			},
+			{
+				"name": "marital",
+				"type": "String"
+			},
+			{
+				"name": "education",
+				"type": "String"
+			},
+			{
+				"name": "default",
+				"type": "String"
+			},
+			{
+				"name": "housing",
+				"type": "String"
+			},
+			{
+				"name": "loan",
+				"type": "String"
+			},
+			{
+				"name": "contact",
+				"type": "String"
+			},
+			{
+				"name": "month",
+				"type": "String"
+			},
+			{
+				"name": "day_of_week",
+				"type": "String"
+			},
+			{
+				"name": "unique_id",
+				"type": "String"
+			}
+		]
+	}
+}
