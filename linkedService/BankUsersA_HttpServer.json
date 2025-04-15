@@ -1,0 +1,12 @@
+{
+	"name": "BankUsersA_HttpServer",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/bank_users_info_group_a.csv",
+			"enableServerCertificateValidation": false,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
