@@ -5,6 +5,8 @@
 			{
 				"name": "Copy BankUsersA from Github",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -13,7 +15,6 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
@@ -58,8 +59,96 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "ForEachUrls",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@array(\n    [\n        concat(pipeline().parameters.mainUrl,'/',pipeline().parameters.filenameA,'.',pipeline().parameters.fileFormat),\n        concat(pipeline().parameters.mainUrl,'/',pipeline().parameters.filenameB,'.',pipeline().parameters.fileFormat)\n    ]\n)",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy BankUsersA from Github_copy1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataA",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "RawDataA",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
 			}
 		],
+		"parameters": {
+			"filenameA": {
+				"type": "string",
+				"defaultValue": "bank_users_info_group_a"
+			},
+			"filenameB": {
+				"type": "string",
+				"defaultValue": "bank_users_info_group_b"
+			},
+			"fileFormat": {
+				"type": "string",
+				"defaultValue": "csv"
+			},
+			"mainUrl": {
+				"type": "string",
+				"defaultValue": "https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main"
+			}
+		},
 		"annotations": []
 	}
 }
