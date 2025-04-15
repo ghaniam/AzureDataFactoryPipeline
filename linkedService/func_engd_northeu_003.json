@@ -1,0 +1,12 @@
+{
+	"name": "func_engd_northeu_003",
+	"properties": {
+		"description": "linked service for http_trigger func",
+		"annotations": [],
+		"type": "AzureFunction",
+		"typeProperties": {
+			"functionAppUrl": "https://func-engd-northeu-003.azurewebsites.net",
+			"authentication": "Anonymous"
+		}
+	}
+}
