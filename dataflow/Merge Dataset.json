@@ -1,0 +1,33 @@
+{
+	"name": "Merge Dataset",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "sourcegroupa"
+				},
+				{
+					"name": "sourcegroupb"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "join1"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> sourcegroupa",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> sourcegroupb",
+				"sourcegroupa, sourcegroupb join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
+			]
+		}
+	}
+}
