@@ -2,11 +2,11 @@
 	"name": "SourceData",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Source",
+			"referenceName": "SourceHttpServer",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"linkedService_URL": {
-					"value": "@concat('https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/',dataset().filename,'.csv')",
+				"url": {
+					"value": "@concat('https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/', dataset().filename, '.csv')\n",
 					"type": "Expression"
 				}
 			}
