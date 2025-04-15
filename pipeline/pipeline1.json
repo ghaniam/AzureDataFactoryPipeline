@@ -98,6 +98,27 @@
 									"type": "DatasetReference"
 								}
 							]
+						},
+						{
+							"name": "func-engd-northeu",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "http_trigger",
+								"method": "GET"
+							},
+							"linkedServiceName": {
+								"referenceName": "funcengdnortheu",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"ifTrueActivities": [
