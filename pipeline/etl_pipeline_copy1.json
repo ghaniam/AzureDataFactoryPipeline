@@ -62,7 +62,7 @@
 									"referenceName": "SourceData",
 									"type": "DatasetReference",
 									"parameters": {
-										"dataset_URL": {
+										"filename": {
 											"value": "@item()",
 											"type": "Expression"
 										}

@@ -6,15 +6,12 @@
 			"type": "LinkedServiceReference",
 			"parameters": {
 				"linkedService_URL": {
-					"value": "@dataset().dataset_URL",
+					"value": "@concat('https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/',dataset().filename,'.csv')",
 					"type": "Expression"
 				}
 			}
 		},
 		"parameters": {
-			"dataset_URL": {
-				"type": "string"
-			},
 			"filename": {
 				"type": "string"
 			}
