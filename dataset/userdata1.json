@@ -1,0 +1,20 @@
+{
+	"name": "userdata1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "stengdnortheu003",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "userdata1.parquet",
+				"container": "source"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
