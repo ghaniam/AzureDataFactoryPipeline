@@ -68,7 +68,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> sourcegroupb",
-				"sourcegroupa, sourcegroupb join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"sourcegroupa, sourcegroupb join(sourcegroupa@unique_id == sourcegroupb@unique_id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
