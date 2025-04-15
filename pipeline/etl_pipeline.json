@@ -5,8 +5,6 @@
 			{
 				"name": "Copy BankUsersA from Github",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -55,7 +53,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "RawDataA",
+						"referenceName": "RawData",
 						"type": "DatasetReference"
 					}
 				]
@@ -63,11 +61,13 @@
 			{
 				"name": "ForEachUrls",
 				"type": "ForEach",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@array(['https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/bank_users_info_group_a.csv','https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/bank_users_info_group_b.csv]'])",
+						"value": "@array(['https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/bank_users_info_group_a.csv','https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/bank_users_info_group_b.csv'])",
 						"type": "Expression"
 					},
 					"activities": [
@@ -128,13 +128,76 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "RawDataA",
+									"referenceName": "RawData",
 									"type": "DatasetReference"
 								}
 							]
 						}
 					]
 				}
+			},
+			{
+				"name": "Copy BankUsersB from Github",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy BankUsersA from Github",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataB",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "RawData",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"parameters": {

@@ -1,16 +1,15 @@
 {
-	"name": "RawData",
+	"name": "SourceDataB",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "rawstorage_linkedservice",
+			"referenceName": "BankUsersB_HttpServer",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
-				"container": "rawdata"
+				"type": "HttpServerLocation"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
