@@ -70,7 +70,16 @@
 								"sink": {
 									"type": "ParquetSink",
 									"storeSettings": {
-										"type": "AzureBlobStorageWriteSettings"
+										"type": "AzureBlobStorageWriteSettings",
+										"metadata": [
+											{
+												"name": "mod_value",
+												"value": {
+													"value": "mod_value",
+													"type": "Expression"
+												}
+											}
+										]
 									},
 									"formatSettings": {
 										"type": "ParquetWriteSettings"
@@ -102,7 +111,14 @@
 						{
 							"name": "func-engd-northeu",
 							"type": "AzureFunctionActivity",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Copy data1",
+									"dependencyConditions": [
+										"Completed"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -113,6 +129,12 @@
 							"userProperties": [],
 							"typeProperties": {
 								"functionName": "http_trigger",
+								"headers": {
+									"metadata": {
+										"value": "@activity('Copy data1').output",
+										"type": "Expression"
+									}
+								},
 								"method": "GET"
 							},
 							"linkedServiceName": {
