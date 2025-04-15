@@ -117,11 +117,6 @@
 								"value": "'@{pipeline().parameters.filenameB}'",
 								"type": "Expression"
 							}
-						},
-						"datasetParameters": {
-							"sourcegroupa": {
-								"filename": "test"
-							}
 						}
 					},
 					"compute": {
