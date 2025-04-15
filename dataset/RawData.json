@@ -2,7 +2,7 @@
 	"name": "RawData",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "rawstorage_linkedservice",
+			"referenceName": "stengdnortheu003",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
