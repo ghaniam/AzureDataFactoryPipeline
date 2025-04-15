@@ -1,0 +1,21 @@
+{
+	"name": "SourceDataA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BankUsersA_HttpServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
