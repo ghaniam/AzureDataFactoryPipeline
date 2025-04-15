@@ -11,7 +11,7 @@
 		"type": "HttpServer",
 		"typeProperties": {
 			"url": "@{linkedService().linkedService_URL}",
-			"enableServerCertificateValidation": true,
+			"enableServerCertificateValidation": false,
 			"authenticationType": "Anonymous"
 		}
 	}
