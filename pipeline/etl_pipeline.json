@@ -17,7 +17,19 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "Merge Dataset",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sourcegroupa": {
+								"filename": "test"
+							}
+						},
+						"linkedServiceParameters": {
+							"sourcegroupa": {
+								"schemaLinkedService": {
+									"filename": "test"
+								}
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,

@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "0111f249-be82-473a-bc32-c4ea741b42d3",
+				"fileName": "bank_users_info_group_b",
 				"container": "rawdata"
 			},
 			"columnDelimiter": ",",
