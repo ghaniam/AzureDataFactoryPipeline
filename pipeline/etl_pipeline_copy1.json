@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@array(['https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/bank_users_info_group_a.csv','https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/bank_users_info_group_b.csv'])",
+						"value": "@array(['bank_users_info_group_a','bank_users_info_group_b'])",
 						"type": "Expression"
 					},
 					"activities": [
