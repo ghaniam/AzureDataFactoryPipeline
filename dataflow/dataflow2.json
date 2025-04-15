@@ -15,23 +15,13 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "derived",
+						"referenceName": "finalderived",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "sink2"
 				}
 			],
-			"transformations": [
-				{
-					"name": "filter1"
-				},
-				{
-					"name": "filter2"
-				},
-				{
-					"name": "filter4"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          age as integer,",
@@ -61,14 +51,10 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> source1",
-				" filter(toInteger(age)) ~> filter1",
-				"filter1 filter(lower(replace(job, '.', ''))) ~> filter2",
-				"source1 filter(replace(job, '.', '')\r",
-				") ~> filter4",
-				"filter2 sink(allowSchemaDrift: true,",
+				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true) ~> sink2"
 			]
 		}
 	}
