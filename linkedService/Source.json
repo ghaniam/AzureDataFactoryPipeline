@@ -3,8 +3,7 @@
 	"properties": {
 		"parameters": {
 			"url": {
-				"type": "string",
-				"defaultValue": "https://www.google.com/"
+				"type": "string"
 			}
 		},
 		"annotations": [],
