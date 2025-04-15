@@ -1,0 +1,12 @@
+{
+	"name": "RawDataSetGithub",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://github.com/ruddra/hackathon-dataset.git",
+			"enableServerCertificateValidation": false,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
