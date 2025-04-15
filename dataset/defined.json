@@ -1,0 +1,109 @@
+{
+	"name": "defined",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "stengdnortheu003",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "part-00000-3223c61b-ac93-42e6-9710-d854b7d86155-c000.snappy.parquet",
+				"container": "defineddata"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "age",
+				"type": "UTF8"
+			},
+			{
+				"name": "job",
+				"type": "UTF8"
+			},
+			{
+				"name": "marital",
+				"type": "UTF8"
+			},
+			{
+				"name": "education",
+				"type": "UTF8"
+			},
+			{
+				"name": "default",
+				"type": "UTF8"
+			},
+			{
+				"name": "housing",
+				"type": "UTF8"
+			},
+			{
+				"name": "loan",
+				"type": "UTF8"
+			},
+			{
+				"name": "contact",
+				"type": "UTF8"
+			},
+			{
+				"name": "month",
+				"type": "UTF8"
+			},
+			{
+				"name": "day_of_week",
+				"type": "UTF8"
+			},
+			{
+				"name": "unique_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "duration",
+				"type": "UTF8"
+			},
+			{
+				"name": "campaign",
+				"type": "UTF8"
+			},
+			{
+				"name": "pdays",
+				"type": "UTF8"
+			},
+			{
+				"name": "previous",
+				"type": "UTF8"
+			},
+			{
+				"name": "poutcome",
+				"type": "UTF8"
+			},
+			{
+				"name": "emp.var.rate",
+				"type": "UTF8"
+			},
+			{
+				"name": "cons.price.idx",
+				"type": "UTF8"
+			},
+			{
+				"name": "cons.conf.idx",
+				"type": "UTF8"
+			},
+			{
+				"name": "euribor3m",
+				"type": "UTF8"
+			},
+			{
+				"name": "nr.employed",
+				"type": "UTF8"
+			},
+			{
+				"name": "y",
+				"type": "UTF8"
+			}
+		]
+	}
+}

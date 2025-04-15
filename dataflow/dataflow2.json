@@ -6,10 +6,10 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "define_data",
+						"referenceName": "defined",
 						"type": "DatasetReference"
 					},
-					"name": "read"
+					"name": "source1"
 				}
 			],
 			"sinks": [
@@ -27,14 +27,44 @@
 				},
 				{
 					"name": "filter2"
+				},
+				{
+					"name": "filter4"
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          age as integer,",
+				"          job as string,",
+				"          marital as string,",
+				"          education as string,",
+				"          default as string,",
+				"          housing as string,",
+				"          loan as string,",
+				"          contact as string,",
+				"          month as string,",
+				"          day_of_week as string,",
+				"          unique_id as string,",
+				"          duration as string,",
+				"          campaign as string,",
+				"          pdays as string,",
+				"          previous as string,",
+				"          poutcome as string,",
+				"          {emp.var.rate} as string,",
+				"          {cons.price.idx} as string,",
+				"          {cons.conf.idx} as string,",
+				"          euribor3m as string,",
+				"          {nr.employed} as string,",
+				"          y as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> read",
-				"read filter(toInteger(age)) ~> filter1",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> source1",
+				" filter(toInteger(age)) ~> filter1",
 				"filter1 filter(lower(replace(job, '.', ''))) ~> filter2",
+				"source1 filter(replace(job, '.', '')\r",
+				") ~> filter4",
 				"filter2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
