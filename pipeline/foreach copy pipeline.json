@@ -1,5 +1,5 @@
 {
-	"name": "etl_pipeline_copy1",
+	"name": "foreach copy pipeline",
 	"properties": {
 		"activities": [
 			{
@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@array(['bank_users_info_group_a','bank_users_info_group_b'])",
+						"value": "@createArray('bank_users_info_group_a','bank_users_info_group_b')",
 						"type": "Expression"
 					},
 					"activities": [
