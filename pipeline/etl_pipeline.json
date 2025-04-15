@@ -13,6 +13,7 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
+				"userProperties": [],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
@@ -32,7 +33,7 @@
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"fileExtension": ".csv"
 						}
 					},
 					"enableStaging": false,
@@ -54,87 +55,15 @@
 				"outputs": [
 					{
 						"referenceName": "RawData",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@pipeline().parameters.filenameA",
+								"type": "Expression"
+							}
+						}
 					}
 				]
-			},
-			{
-				"name": "ForEachUrls",
-				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"items": {
-						"value": "@array(['https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/bank_users_info_group_a.csv','https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/bank_users_info_group_b.csv'])",
-						"type": "Expression"
-					},
-					"activities": [
-						{
-							"name": "Copy source",
-							"type": "Copy",
-							"dependsOn": [],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"typeProperties": {
-								"source": {
-									"type": "DelimitedTextSource",
-									"storeSettings": {
-										"type": "HttpReadSettings",
-										"requestMethod": "GET"
-									},
-									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
-									}
-								},
-								"sink": {
-									"type": "DelimitedTextSink",
-									"storeSettings": {
-										"type": "AzureBlobStorageWriteSettings"
-									},
-									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
-									}
-								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
-								}
-							},
-							"inputs": [
-								{
-									"referenceName": "SourceData",
-									"type": "DatasetReference",
-									"parameters": {
-										"dataset_URL": {
-											"value": "@item()",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "RawData",
-									"type": "DatasetReference"
-								}
-							]
-						}
-					]
-				}
 			},
 			{
 				"name": "Copy BankUsersB from Github",
@@ -154,6 +83,7 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
+				"userProperties": [],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
@@ -173,7 +103,7 @@
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"fileExtension": ".csv"
 						}
 					},
 					"enableStaging": false,
@@ -195,7 +125,13 @@
 				"outputs": [
 					{
 						"referenceName": "RawData",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@pipeline().parameters.filenameB",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
@@ -208,14 +144,6 @@
 			"filenameB": {
 				"type": "string",
 				"defaultValue": "bank_users_info_group_b"
-			},
-			"fileFormat": {
-				"type": "string",
-				"defaultValue": "csv"
-			},
-			"mainUrl": {
-				"type": "string",
-				"defaultValue": "https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main"
 			}
 		},
 		"annotations": []
