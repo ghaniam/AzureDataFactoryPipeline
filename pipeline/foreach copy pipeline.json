@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@createArray('bank_users_info_group_a','bank_users_info_group_b')",
+						"value": "@createArray(pipeline().parameters.filenameA, pipeline().parameters.filenameB)",
 						"type": "Expression"
 					},
 					"activities": [
@@ -108,6 +108,16 @@
 					"dataflow": {
 						"referenceName": "Merge Dataset",
 						"type": "DataFlowReference",
+						"parameters": {
+							"filenameA": {
+								"value": "'@{pipeline().parameters.filenameA}'",
+								"type": "Expression"
+							},
+							"filenameB": {
+								"value": "'@{pipeline().parameters.filenameB}'",
+								"type": "Expression"
+							}
+						},
 						"datasetParameters": {
 							"sourcegroupa": {
 								"filename": "test"

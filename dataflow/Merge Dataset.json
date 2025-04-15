@@ -36,7 +36,8 @@
 			],
 			"scriptLines": [
 				"parameters{",
-				"     filenameA as string",
+				"     filenameA as string,",
+				"     filenameB as string",
 				"}",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
