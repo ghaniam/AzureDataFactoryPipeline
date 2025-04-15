@@ -120,8 +120,49 @@
 					},
 					"traceLevel": "Fine"
 				}
+			},
+			{
+				"name": "Cleanup",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Merge",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow2",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
 			}
 		],
+		"parameters": {
+			"filenameA": {
+				"type": "string",
+				"defaultValue": "bank_users_info_group_a"
+			},
+			"filenameB": {
+				"type": "string",
+				"defaultValue": "bank_users_info_group_b"
+			}
+		},
 		"annotations": []
 	}
 }
