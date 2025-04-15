@@ -155,6 +155,10 @@
 			"doTransformation": {
 				"type": "Int",
 				"defaultValue": 0
+			},
+			"mod_value": {
+				"type": "int",
+				"defaultValue": 0
 			}
 		},
 		"annotations": []

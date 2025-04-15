@@ -41,7 +41,7 @@
 			],
 			"scriptLines": [
 				"parameters{",
-				"     mod_value as integer (0)",
+				"     mod_value as integer ($mod_value)",
 				"}",
 				"source(output(",
 				"          registration_dttm as timestamp,",
@@ -87,7 +87,7 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
-				"filter1 derive(id_mod = mod(srcuserdata1@id, 2)) ~> derivedColumn1",
+				"filter1 derive(id_even = equals(mod(srcuserdata1@id, 2), $mod_value) ) ~> derivedColumn1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
