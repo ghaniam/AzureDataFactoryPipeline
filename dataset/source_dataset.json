@@ -1,0 +1,22 @@
+{
+	"name": "source_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "raw_dataset",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "https://github.com/ruddra/hackathon-dataset/blob/main/bank_users_info_group_a.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
