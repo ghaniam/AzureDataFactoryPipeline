@@ -67,12 +67,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@array(\n    [\n        concat(pipeline().parameters.mainUrl,'/',pipeline().parameters.filenameA,'.',pipeline().parameters.fileFormat),\n        concat(pipeline().parameters.mainUrl,'/',pipeline().parameters.filenameB,'.',pipeline().parameters.fileFormat)\n    ]\n)",
+						"value": "@array(['https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/bank_users_info_group_a.csv','https://raw.githubusercontent.com/ruddra/hackathon-dataset/refs/heads/main/bank_users_info_group_b.csv]'])",
 						"type": "Expression"
 					},
 					"activities": [
 						{
-							"name": "Copy BankUsersA from Github_copy1",
+							"name": "Copy source",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -116,8 +116,14 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "SourceDataA",
-									"type": "DatasetReference"
+									"referenceName": "SourceData",
+									"type": "DatasetReference",
+									"parameters": {
+										"dataset_URL": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [

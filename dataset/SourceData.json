@@ -1,12 +1,12 @@
 {
-	"name": "DelimitedText1",
+	"name": "SourceData",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "HttpServer1",
+			"referenceName": "Source",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"url": {
-					"value": "@dataset().url",
+				"linkedService_URL": {
+					"value": "@dataset().dataset_URL",
 					"type": "Expression"
 				}
 			}
