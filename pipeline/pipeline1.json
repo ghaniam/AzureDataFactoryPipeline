@@ -17,7 +17,13 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "indosalaries",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"parameters": {
+							"mod_value": {
+								"value": "@pipeline().parameters.mod_value",
+								"type": "Expression"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,
@@ -61,11 +67,34 @@
 										"type": "ParquetReadSettings"
 									}
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
 									"referenceName": "userdata1",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "destuserdata1",
 									"type": "DatasetReference"
 								}
 							]
@@ -107,6 +136,10 @@
 			"do_transformation": {
 				"type": "int",
 				"defaultValue": 0
+			},
+			"mod_value": {
+				"type": "int",
+				"defaultValue": 1
 			}
 		},
 		"annotations": []
